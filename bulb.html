@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulb Control</title>
+    <style>
+        /* Overall body styling with a striking background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #1e1e2f, #4a4a6a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Container styling */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Bulb styling */
+        .bulb-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .bulb {
+            width: 150px;
+            height: auto;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .bulb:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        /* Glowing effect */
+        .glow {
+            animation: glowColors 1.5s infinite alternate;
+        }
+
+        @keyframes glowColors {
+            0% {
+                filter: drop-shadow(0 0 20px red);
+            }
+
+            100% {
+                filter: drop-shadow(0 0 20px yellow);
+            }
+        }
+
+        /* Button styling */
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #ff6f61, #ff8e4b);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s;
+            z-index: 0;
+        }
+
+        button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff8e4b, #ff6f61);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Footer for credits */
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Bulbs Switching</h2>
+
+        <div class="bulb-container">
+            <!-- Bulb 1 -->
+            <img id="bulb1" class="bulb" src="https://www.w3schools.com/js/pic_bulboff.gif" alt="Bulb OFF">
+            <!-- Bulb 2 -->
+            <img id="bulb2" class="bulb" src="https://www.w3schools.com/js/pic_bulboff.gif" alt="Bulb OFF">
+        </div>
+
+        <div>
+            <!-- Common ON/OFF buttons -->
+            <button onclick="turnOnAll()">Turn ON</button>
+            <button onclick="turnOffAll()">Turn OFF</button>
+        </div>
+    </div>
+
+    <script>
+        function turnOnAll() {
+            const bulbs = ['bulb1', 'bulb2'];
+            bulbs.forEach(bulbId => {
+                const bulb = document.getElementById(bulbId);
+                bulb.src = 'https://www.w3schools.com/js/pic_bulbon.gif'; // Bulb ON image
+                bulb.alt = 'Bulb ON';
+                bulb.classList.add('glow'); // Add glowing effect
+            });
+        }
+
+        function turnOffAll() {
+            const bulbs = ['bulb1', 'bulb2'];
+            bulbs.forEach(bulbId => {
+                const bulb = document.getElementById(bulbId);
+                bulb.src = 'https://www.w3schools.com/js/pic_bulboff.gif'; // Bulb OFF image
+                bulb.alt = 'Bulb OFF';
+                bulb.classList.remove('glow'); // Remove glowing effect
+            });
+        }
+    </script>
+
+</body>
+
+</html>
